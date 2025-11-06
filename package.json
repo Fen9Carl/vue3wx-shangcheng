@@ -41,7 +41,8 @@
     "tsc": "vue-tsc --noEmit --skipLibCheck",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "test": "echo \"暂无测试用例\" && exit 0"
   },
   "lint-staged": {
     "*.{js,ts,vue}": [
