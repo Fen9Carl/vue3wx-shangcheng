@@ -27,3 +27,11 @@ export const getHomeHotAPI = () => {
     url: '/home/hot/mutli',
   })
 }
+
+//猜你喜欢数据接口
+export const getHomeGoodsGuessLikeAPI = () => {
+  return http({
+    method: 'GET',
+    url: '/home/goods/guessLike',
+  })
+}
