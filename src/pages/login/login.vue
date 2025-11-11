@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { postLoginWxMinAPI, postLoginWxMinSimpleAPI } from '@/services/login'
 import { onLoad } from '@dcloudio/uni-app'
+import { useMemberStore } from '@/stores/modules/member'
+import type { LoginResult } from '@/types/member'
 
 // 获取用户手机号码(实际上用不了，因为要企业开发才能获取到微信code数据)
 // 获取 code 登录凭证
@@ -14,17 +16,29 @@ const onGetphonenumber: UniHelper.ButtonOnGetphonenumber = async (ev) => {
   const encryptedData = ev.detail.encryptedData!
   const iv = ev.detail.iv!
   // 登录请求
-  await postLoginWxMinAPI({ code, encryptedData, iv })
+  const res = await postLoginWxMinAPI({ code, encryptedData, iv })
   // 成功提示
   uni.showToast({ icon: 'none', title: '登录成功' })
+  loginSuccess(res.result)
 }
 
 //模拟手机号快捷登陆
 const onGetphonenumberSimple = async () => {
   const res = await postLoginWxMinSimpleAPI('15928822115')
-  console.log(res)
+  loginSuccess(res.result)
+}
+
+//保存会员信息
+const loginSuccess = (profile: LoginResult) => {
+  //保存会员信息
+  const menberStore = useMemberStore()
+  menberStore.setProfile(profile)
   // 成功提示
   uni.showToast({ icon: 'none', title: '登录成功' })
+  setTimeout(() => {
+    //页面跳转
+    uni.switchTab({ url: '/pages/my/my' })
+  }, 500)
 }
 </script>
 
