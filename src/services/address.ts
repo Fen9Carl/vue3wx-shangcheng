@@ -26,3 +26,12 @@ export const getMemberAddressByIdAPI = (id: string) => {
     url: `/member/address/${id}`,
   })
 }
+
+//修改地址的接口
+export const putMemberAddressByIdAPI = (id: string, data: AddressParams) => {
+  return http({
+    method: 'PUT',
+    url: `/member/address/${id}`,
+    data,
+  })
+}
